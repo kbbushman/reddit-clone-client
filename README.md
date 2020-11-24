@@ -6,3 +6,4 @@
 - React
 - Next.js
 - Chakra
+- TypeScript
