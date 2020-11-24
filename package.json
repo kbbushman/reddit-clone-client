@@ -20,5 +20,17 @@
   "devDependencies": {
     "@types/node": "^14.14.9",
     "typescript": "^4.1.2"
-  }
+  },
+  "description": "Reddit clone built with URQL/Apollo, React, Next, Chakra, and TypeScript",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kbbushman/reddit-clone-client.git"
+  },
+  "keywords": [],
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/kbbushman/reddit-clone-client/issues"
+  },
+  "homepage": "https://github.com/kbbushman/reddit-clone-client#readme"
 }
