@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box, Button } from '@chakra-ui/react';
 import { Formik, Form } from 'formik';
-import { useMutation } from 'urql';
 import Wrapper from '../components/Wrapper';
 import InputField from '../components/InputField';
+import { useRegisterMutation } from '../generated/graphql';
 
 interface registerProps {}
 
@@ -25,7 +25,7 @@ const REGISTER_MUTATION = `
 `;
 
 const Register: React.FC<registerProps> = ({}) => {
-  const [{}, register] = useMutation(REGISTER_MUTATION);
+  const [{}, register] = useRegisterMutation();
 
   return (
     <Wrapper variant='small'>
