@@ -7,23 +7,6 @@ import { useRegisterMutation } from '../generated/graphql';
 
 interface registerProps {}
 
-const REGISTER_MUTATION = `
-  mutation Register($username: String!, $password: String!) {
-    register(options: {username: $username, password: $password}) {
-      errors {
-        field
-        message
-      }
-      user {
-        id
-        username
-        createdAt
-        updatedAt
-      }
-    }
-  }
-`;
-
 const Register: React.FC<registerProps> = ({}) => {
   const [{}, register] = useRegisterMutation();
 
