@@ -12,7 +12,7 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
   let body = null;
 
   if (fetching) {
-    body = <h2>Loading....</h2>
+    body = '';
   } else if (!data?.me) {
     body = (
       <>
@@ -35,7 +35,6 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
 
   return (
     <Flex bg='tan' p={4}>
-      
       <Box ml={'auto'}>
         {body}
       </Box>
