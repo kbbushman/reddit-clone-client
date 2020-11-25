@@ -27,14 +27,14 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
   } else {
     body = (
       <Flex>
-        <Box mr={2}>{data.me.username}</Box>
+        <Box mr={3}>{data.me.username}</Box>
         <Button variant='link'>Logout</Button>
       </Flex>
     );
   }
 
   return (
-    <Flex bg='tomato' p={4}>
+    <Flex bg='tan' p={4}>
       
       <Box ml={'auto'}>
         {body}
