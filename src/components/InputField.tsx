@@ -6,7 +6,7 @@ import {
   Input,
   FormErrorMessage,
   Textarea,
-} from '@chakra-ui/core'; // @charkra-ui/react input prop types do not match with Input and Textarea. Must use @charkra-ui/core
+} from '@chakra-ui/react';
 
 type InputFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string;
