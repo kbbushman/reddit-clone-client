@@ -1,6 +1,6 @@
 import React from "react";
 import NextLink from 'next/link';
-import { Box, Flex, Heading, Link, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Link, Stack, Text } from '@chakra-ui/react';
 import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '../utils/createUrqlClient';
 import { usePostsQuery } from '../generated/graphql';
@@ -12,6 +12,10 @@ const Index = () => {
       limit: 10,
     }
   });
+
+  if (!fetching && !data) {
+    return <div>No posts available</div>
+  }
 
   return (
     <Layout>
@@ -28,7 +32,7 @@ const Index = () => {
         ? <div>Loading...</div>
         : (
           <Stack spacing={8}>
-            {data?.posts.map((post) => (
+            {data!.posts.map((post) => (
               <Box key={post.id} p={5} shadow="md" borderWidth="1px">
                 <Heading fontSize="xl">{post.title}</Heading>
                 <Text mt={4}>{post.textSnippet}</Text>
@@ -37,6 +41,19 @@ const Index = () => {
           </Stack>
         )
       }
+
+      {data && (
+        <Flex>
+          <Button
+            m='auto'
+            my={8}
+            colorScheme='blue'
+            isLoading={fetching}
+          >
+            Load More
+          </Button>
+        </Flex>
+      )}
     </Layout>
   );
 };
