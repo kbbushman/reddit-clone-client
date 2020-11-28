@@ -48,10 +48,10 @@ const Index = () => {
             my={8}
             colorScheme='blue'
             isLoading={fetching}
-            onClick={() => {console.log('click'); setVariables({
+            onClick={() => setVariables({
               limit: variables.limit,
               cursor: data.posts.posts[data.posts.posts.length - 1].createdAt})
-            }}
+            }
           >
             Load More
           </Button>
