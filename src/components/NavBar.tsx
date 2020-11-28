@@ -16,7 +16,7 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
   if (fetching) {
     body = '';
   } else if (!data?.me) {
-    body = (
+    body = !isServer() && (
       <>
         <NextLink href='/login'>
           <Link mr={2}>Login</Link>
@@ -25,7 +25,7 @@ const NavBar: React.FC<NavBarProps> = ({}) => {
           <Link>Register</Link>
         </NextLink>
       </>
-    );
+    )
   } else {
     body = (
       <Flex>
