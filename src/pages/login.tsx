@@ -1,6 +1,6 @@
 import React from 'react';
 import NextLink from 'next/link';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import { Box, Button, Flex, Link } from '@chakra-ui/react';
 import { Formik, Form } from 'formik';
 import Wrapper from '../components/Wrapper';
