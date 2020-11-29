@@ -7,7 +7,7 @@ import { usePostsQuery } from '../generated/graphql';
 import Layout from '../components/Layout';
 
 const Index = () => {
-  const [variables, setVariables] = useState({limit: 10, cursor: null as string | null});
+  const [variables, setVariables] = useState({limit: 15, cursor: null as string | null});
   const [{ data, fetching }] = usePostsQuery({
     variables,
   });
