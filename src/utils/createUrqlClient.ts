@@ -9,7 +9,6 @@ import {
   MeDocument,
   LoginMutation,
   RegisterMutation,
-  VoteMutation,
   VoteMutationVariables
 } from "../generated/graphql";
 import { betterUpdateQuery } from "./betterUpdateQuery";
@@ -87,19 +86,24 @@ export const createUrqlClient = (ssrExchange: any) => ({
                 fragment _ on Post {
                   id
                   points
+                  voteStatus
                 }
               `,
               {id: postId} as any
             );
             if (data) {
-              const newPoints = (data.points as number) + value;
+              if (data.voteStatus === args.value) {
+                return;
+              }
+              const newPoints = (data.points as number) + (!data.voteStatus ? 1 : 2) * value;
               cache.writeFragment(
                 gpl`
                   fragment __ on Post {
                     points
+                    voteStatus
                   }
                 `,
-                {id: postId, points: newPoints} as any
+                {id: postId, points: newPoints, voteStatus: value} as any
               );
             }
           },
