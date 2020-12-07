@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import NextLink from 'next/link';
-import { Box, Button, Flex, Heading, Link, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, IconButton, Link, Stack, Text } from '@chakra-ui/react';
+import { DeleteIcon } from '@chakra-ui/icons'
 import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '../utils/createUrqlClient';
-import { usePostsQuery } from '../generated/graphql';
+import { useDeletePostMutation, usePostsQuery } from '../generated/graphql';
 import Layout from '../components/Layout';
 import UpdootSection from "../components/UpdootSection";
 
@@ -12,6 +13,8 @@ const Index = () => {
   const [{ data, fetching }] = usePostsQuery({
     variables,
   });
+
+  const [, deletePost] = useDeletePostMutation();
 
   if (!fetching && !data) {
     return <div>No posts available</div>
@@ -26,14 +29,26 @@ const Index = () => {
             {data!.posts.posts.map((post) => (
               <Flex key={post.id} p={5} shadow="md" borderWidth="1px">
                 <UpdootSection post={post} />
-                <Box>
+                <Box flex={1}>
                   <NextLink href='/post/[id]' as={`/post/${post.id}`}>
                     <Link>
                       <Heading mb={1} fontSize="xl">{post.title}</Heading>
                     </Link>
                   </NextLink>
                   <Text mb={4}>posted by {post.creator.username}</Text>
-                  <Text>{post.textSnippet}</Text>
+                  <Flex align='center'>
+                    <Text flex={1}>{post.textSnippet}</Text>
+                    <IconButton
+                      aria-label="Delete"
+                      background='red.400'
+                      color='white'
+                      colorScheme='red'
+                      icon={<DeleteIcon size='24px' />}
+                      onClick={() => {
+                        deletePost({id: post.id});
+                      }}
+                    />
+                  </Flex>
                 </Box>
               </Flex>
             ))}
