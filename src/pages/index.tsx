@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import NextLink from 'next/link';
-import { Box, Button, Flex, Heading, IconButton, Link, Stack, Text } from '@chakra-ui/react';
-import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
+import { Box, Button, Flex, Heading, Link, Stack, Text } from '@chakra-ui/react';
 import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '../utils/createUrqlClient';
-import { useDeletePostMutation, useMeQuery, usePostsQuery } from '../generated/graphql';
+import { useMeQuery, usePostsQuery } from '../generated/graphql';
 import Layout from '../components/Layout';
 import UpdootSection from "../components/UpdootSection";
 import EditDeletePostButtons from "../components/EditDeletePostButtons";
@@ -15,8 +14,6 @@ const Index = () => {
   const [{ data, fetching }] = usePostsQuery({
     variables,
   });
-
-  const [, deletePost] = useDeletePostMutation();
 
   if (!fetching && !data) {
     return <div>No posts available</div>
