@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import NextLink from 'next/link';
 import { Box, Button, Flex, Heading, IconButton, Link, Stack, Text } from '@chakra-ui/react';
-import { DeleteIcon } from '@chakra-ui/icons'
+import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '../utils/createUrqlClient';
 import { useDeletePostMutation, usePostsQuery } from '../generated/graphql';
@@ -40,16 +40,29 @@ const Index = () => {
                     <Text mb={4}>posted by {post.creator.username}</Text>
                     <Flex align='center'>
                       <Text flex={1}>{post.textSnippet}</Text>
-                      <IconButton
-                        aria-label="Delete"
-                        background='red.400'
-                        color='white'
-                        colorScheme='red'
-                        icon={<DeleteIcon size='24px' />}
-                        onClick={() => {
-                          deletePost({id: post.id});
-                        }}
-                      />
+                      <Box ml='auto'>
+                        <IconButton
+                          aria-label="Delete"
+                          background='red.400'
+                          color='white'
+                          colorScheme='red'
+                          mr={4}
+                          icon={<DeleteIcon size='24px' />}
+                          onClick={() => {
+                            deletePost({id: post.id});
+                          }}
+                        />
+                        <NextLink href={'/post/edit/[id]'} as={`/post/edit/${post.id}`}>
+                          <IconButton
+                            as={Link}
+                            aria-label="Edit"
+                            background='green.400'
+                            color='white'
+                            colorScheme='green'
+                            icon={<EditIcon size='24px' />}
+                          />
+                        </NextLink>
+                      </Box>
                     </Flex>
                   </Box>
                 </Flex>
