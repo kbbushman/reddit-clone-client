@@ -26,31 +26,33 @@ const Index = () => {
         ? <div>Loading...</div>
         : (
           <Stack spacing={8}>
-            {data!.posts.posts.map((post) => (
-              <Flex key={post.id} p={5} shadow="md" borderWidth="1px">
-                <UpdootSection post={post} />
-                <Box flex={1}>
-                  <NextLink href='/post/[id]' as={`/post/${post.id}`}>
-                    <Link>
-                      <Heading mb={1} fontSize="xl">{post.title}</Heading>
-                    </Link>
-                  </NextLink>
-                  <Text mb={4}>posted by {post.creator.username}</Text>
-                  <Flex align='center'>
-                    <Text flex={1}>{post.textSnippet}</Text>
-                    <IconButton
-                      aria-label="Delete"
-                      background='red.400'
-                      color='white'
-                      colorScheme='red'
-                      icon={<DeleteIcon size='24px' />}
-                      onClick={() => {
-                        deletePost({id: post.id});
-                      }}
-                    />
-                  </Flex>
-                </Box>
-              </Flex>
+            {data!.posts.posts.map((post) => !post
+              ? null
+              : (
+                <Flex key={post.id} p={5} shadow="md" borderWidth="1px">
+                  <UpdootSection post={post} />
+                  <Box flex={1}>
+                    <NextLink href='/post/[id]' as={`/post/${post.id}`}>
+                      <Link>
+                        <Heading mb={1} fontSize="xl">{post.title}</Heading>
+                      </Link>
+                    </NextLink>
+                    <Text mb={4}>posted by {post.creator.username}</Text>
+                    <Flex align='center'>
+                      <Text flex={1}>{post.textSnippet}</Text>
+                      <IconButton
+                        aria-label="Delete"
+                        background='red.400'
+                        color='white'
+                        colorScheme='red'
+                        icon={<DeleteIcon size='24px' />}
+                        onClick={() => {
+                          deletePost({id: post.id});
+                        }}
+                      />
+                    </Flex>
+                  </Box>
+                </Flex>
             ))}
           </Stack>
         )
