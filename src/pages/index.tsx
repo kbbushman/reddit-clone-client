@@ -7,6 +7,7 @@ import { createUrqlClient } from '../utils/createUrqlClient';
 import { useDeletePostMutation, useMeQuery, usePostsQuery } from '../generated/graphql';
 import Layout from '../components/Layout';
 import UpdootSection from "../components/UpdootSection";
+import EditDeletePostButtons from "../components/EditDeletePostButtons";
 
 const Index = () => {
   const [variables, setVariables] = useState({limit: 15, cursor: null as string | null});
@@ -43,27 +44,7 @@ const Index = () => {
                       <Text flex={1}>{post.textSnippet}</Text>
                       {meData?.me?.id === post.creator.id && (
                         <Box ml='auto'>
-                          <IconButton
-                            aria-label="Delete"
-                            // background='red.400'
-                            // color='white'
-                            // colorScheme='grey'
-                            mr={3}
-                            icon={<DeleteIcon size='24px' />}
-                            onClick={() => {
-                              deletePost({id: post.id});
-                            }}
-                          />
-                          <NextLink href={'/post/edit/[id]'} as={`/post/edit/${post.id}`}>
-                            <IconButton
-                              as={Link}
-                              aria-label="Edit"
-                              // background='green.400'
-                              // color='white'
-                              // colorScheme='green'
-                              icon={<EditIcon size='24px' />}
-                            />
-                          </NextLink>
+                          <EditDeletePostButtons id={post.id} />
                         </Box>
                       )}
                     </Flex>
