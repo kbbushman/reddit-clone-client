@@ -4,12 +4,13 @@ import { Box, Button, Flex, Heading, IconButton, Link, Stack, Text } from '@chak
 import { DeleteIcon, EditIcon } from '@chakra-ui/icons'
 import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '../utils/createUrqlClient';
-import { useDeletePostMutation, usePostsQuery } from '../generated/graphql';
+import { useDeletePostMutation, useMeQuery, usePostsQuery } from '../generated/graphql';
 import Layout from '../components/Layout';
 import UpdootSection from "../components/UpdootSection";
 
 const Index = () => {
   const [variables, setVariables] = useState({limit: 15, cursor: null as string | null});
+  const [{ data: meData }] = useMeQuery();
   const [{ data, fetching }] = usePostsQuery({
     variables,
   });
@@ -40,29 +41,31 @@ const Index = () => {
                     <Text mb={4}>posted by {post.creator.username}</Text>
                     <Flex align='center'>
                       <Text flex={1}>{post.textSnippet}</Text>
-                      <Box ml='auto'>
-                        <IconButton
-                          aria-label="Delete"
-                          // background='red.400'
-                          // color='white'
-                          // colorScheme='grey'
-                          mr={3}
-                          icon={<DeleteIcon size='24px' />}
-                          onClick={() => {
-                            deletePost({id: post.id});
-                          }}
-                        />
-                        <NextLink href={'/post/edit/[id]'} as={`/post/edit/${post.id}`}>
+                      {meData?.me?.id === post.creator.id && (
+                        <Box ml='auto'>
                           <IconButton
-                            as={Link}
-                            aria-label="Edit"
-                            // background='green.400'
+                            aria-label="Delete"
+                            // background='red.400'
                             // color='white'
-                            // colorScheme='green'
-                            icon={<EditIcon size='24px' />}
+                            // colorScheme='grey'
+                            mr={3}
+                            icon={<DeleteIcon size='24px' />}
+                            onClick={() => {
+                              deletePost({id: post.id});
+                            }}
                           />
-                        </NextLink>
-                      </Box>
+                          <NextLink href={'/post/edit/[id]'} as={`/post/edit/${post.id}`}>
+                            <IconButton
+                              as={Link}
+                              aria-label="Edit"
+                              // background='green.400'
+                              // color='white'
+                              // colorScheme='green'
+                              icon={<EditIcon size='24px' />}
+                            />
+                          </NextLink>
+                        </Box>
+                      )}
                     </Flex>
                   </Box>
                 </Flex>
