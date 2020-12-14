@@ -43,10 +43,10 @@ const Index = () => {
                       <Box ml='auto'>
                         <IconButton
                           aria-label="Delete"
-                          background='red.400'
-                          color='white'
-                          colorScheme='red'
-                          mr={4}
+                          // background='red.400'
+                          // color='white'
+                          // colorScheme='grey'
+                          mr={3}
                           icon={<DeleteIcon size='24px' />}
                           onClick={() => {
                             deletePost({id: post.id});
@@ -56,9 +56,9 @@ const Index = () => {
                           <IconButton
                             as={Link}
                             aria-label="Edit"
-                            background='green.400'
-                            color='white'
-                            colorScheme='green'
+                            // background='green.400'
+                            // color='white'
+                            // colorScheme='green'
                             icon={<EditIcon size='24px' />}
                           />
                         </NextLink>
