@@ -3,14 +3,13 @@ import NextLink from 'next/link';
 import { Box, Button, Flex, Heading, Link, Stack, Text } from '@chakra-ui/react';
 import { withUrqlClient } from 'next-urql';
 import { createUrqlClient } from '../utils/createUrqlClient';
-import { useMeQuery, usePostsQuery } from '../generated/graphql';
+import { usePostsQuery } from '../generated/graphql';
 import Layout from '../components/Layout';
 import UpdootSection from "../components/UpdootSection";
 import EditDeletePostButtons from "../components/EditDeletePostButtons";
 
 const Index = () => {
   const [variables, setVariables] = useState({limit: 15, cursor: null as string | null});
-  const [{ data: meData }] = useMeQuery();
   const [{ data, fetching }] = usePostsQuery({
     variables,
   });
