@@ -39,11 +39,9 @@ const Index = () => {
                     <Text mb={4}>posted by {post.creator.username}</Text>
                     <Flex align='center'>
                       <Text flex={1}>{post.textSnippet}</Text>
-                      {meData?.me?.id === post.creator.id && (
-                        <Box ml='auto'>
-                          <EditDeletePostButtons id={post.id} />
-                        </Box>
-                      )}
+                      <Box ml='auto'>
+                        <EditDeletePostButtons id={post.id} creatorId={post.creator.id} />
+                      </Box>
                     </Flex>
                   </Box>
                 </Flex>
